@@ -21,6 +21,18 @@
 </head>
 <body>
     <div id="app">
+        @if (auth()->check() && !auth()->user()->email_verified_at)
+            <div class="alert alert-danger w-full m-0 text-center" role="alert">
+                You not verified,
+                <form action="{{ route('verification.resend') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit">
+                        resend email?
+                    </button>
+                </form>
+            </div>
+        @endif
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -73,6 +85,19 @@
         </nav>
 
         <main class="py-4">
+
+            <div class="container">
+                @if ($msg = session('success'))
+                    <div class="row">
+                        <div class="col-8 m-auto">
+                            <div class="alert alert-success" role="alert">
+                                {{ $msg }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
             @yield('content')
         </main>
     </div>
