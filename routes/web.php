@@ -21,3 +21,8 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+Route::group(['namespace' => 'User', 'prefix' => 'users/password'], function () {
+    Route::get('/', 'PasswordController@showPasswordForm')->name('password.edit');
+    Route::patch('/', 'PasswordController@changePassword');
+});
