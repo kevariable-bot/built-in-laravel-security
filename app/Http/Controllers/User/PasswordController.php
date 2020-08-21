@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application password form.
      *
