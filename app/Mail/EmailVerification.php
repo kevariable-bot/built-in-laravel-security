@@ -39,8 +39,14 @@ class EmailVerification extends Mailable
         ])->subject('Please verify your email');
     }
 
+    /**
+     * Build the verification URL
+     * 
+     * @return URL
+     */
     protected function verificationUrl()
     {
+        /*  */
         return URL::temporarySignedRoute(
             /* route */
             'verification.verify',
